@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.futuremind.recyclerfastscroll:fastscroll:0.2.5@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-fastscroll-0.2.5.aar/ac5998fcdbcf742b5c34664dcfbb084e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-fastscroll-0.2.5.aar/ac5998fcdbcf742b5c34664dcfbb084e/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.futuremind.recyclerfastscroll/fastscroll/0.2.5/b5e0762cb0d3f5a342f3dd3e2f31d6963d40b491/fastscroll-0.2.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

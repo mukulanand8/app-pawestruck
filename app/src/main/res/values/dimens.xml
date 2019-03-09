@@ -1,0 +1,72 @@
+<resources>
+
+    <!--MainActivity-->
+    <dimen name="main_fab_max_image">32dp</dimen>
+    <dimen name="main_fab_margin">16dp</dimen>
+    <dimen name="main_fab_elevation">16dp</dimen>
+
+    <!--SignInActivity-->
+    <dimen name="sign_image_margin">50dp</dimen>
+    <dimen name="sign_login_width">310dp</dimen>
+    <dimen name="sign_margin_8dp">8dp</dimen>
+    <dimen name="sign_margin_10dp">10dp</dimen>
+    <dimen name="sign_margin_24dp">24dp</dimen>
+    <dimen name="sign_forgot_pass_padding">10.5dp</dimen>
+    <dimen name="sign_textbox_icon_padding">8dp</dimen>
+    <dimen name="sign_textbox_padding">12dp</dimen>
+    <dimen name="sign_logo_dimen">70dp</dimen>
+
+    <!--DiscourageActivity-->
+    <dimen name="discourage_padding">16dp</dimen>
+
+    <!--AddPostActivity-->
+    <dimen name="addp_margin">32dp</dimen>
+    <dimen name="addp_progress">20dp</dimen>
+    <dimen name="addp_views_spacing">12dp</dimen>
+    <dimen name="addp_image">250dp</dimen>
+
+    <!--OTPActivity-->
+    <dimen name="otp_padding">40dp</dimen>
+    <dimen name="otp_views_spacing">20dp</dimen>
+    <dimen name="otp_views_separator">100dp</dimen>
+
+    <!--SupportFragment-->
+    <dimen name="supp_views_spacing">8dp</dimen>
+    <dimen name="supp_child_margin">12dp</dimen>
+    <dimen name="supp_padding_bot">130dp</dimen>
+    <dimen name="supp_arrows">24dp</dimen>
+
+    <!--ProfileFragment-->
+    <dimen name="prof_dp">150dp</dimen>
+    <dimen name="prof_fab_margin">8dp</dimen>
+    <dimen name="prof_padding_side">32dp</dimen>
+    <dimen name="prof_padding_bot">64dp</dimen>
+    <dimen name="prof_views_separator">40dp</dimen>
+    <dimen name="prof_views_spacing">12dp</dimen>
+
+    <!--BookmarksFragment-->
+    <dimen name="mark_sides_margin">32dp</dimen>
+
+    <!--HomeFragment-->
+    <dimen name="home_welcome_image">100dp</dimen>
+
+    <!--Card-->
+    <dimen name="card_image">250dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_corners">8dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_fab_margin">2dp</dimen>
+    <dimen name="card_button_margin">16dp</dimen>
+    <dimen name="card_dp">45dp</dimen>
+
+    <!--FilterAlertDialog-->
+    <dimen name="filter_padding">16dp</dimen>
+    <dimen name="filter_views_spacing">32dp</dimen>
+    <dimen name="filter_views_separator">48dp</dimen>
+    <dimen name="filter_rg_margin">13dp</dimen>
+
+    <!--Others-->
+    <dimen name="rounded_curve">30dp</dimen>
+    <dimen name="card_font_size">15sp</dimen>
+
+</resources>

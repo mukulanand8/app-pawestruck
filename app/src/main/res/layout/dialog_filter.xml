@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/filter_padding"
+    android:paddingTop="@dimen/filter_padding"
+    android:paddingEnd="@dimen/filter_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/filter_views_spacing"
+            android:layout_marginBottom="@dimen/filter_padding"
+            android:text="@string/filter_by"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/filt_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/filter_spinner" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/filt_rg_animal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/filter_rg_margin"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/filter_views_spacing"
+            android:text="@string/filter_animal1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/filter_views_spacing"
+            android:text="@string/filter_animal2" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/filter_views_spacing"
+            android:text="@string/filter_animal3" />
+    </RadioGroup>
+
+    <AutoCompleteTextView
+        android:id="@+id/filt_actv_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/filter_views_separator"
+        android:layout_marginBottom="@dimen/filter_padding"
+        android:text="@string/filter_sort_by"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/filt_rg_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/filt_rb_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/filter_views_spacing"
+            android:text="@string/filter_asc" />
+
+        <RadioButton
+            android:id="@+id/filt_rb_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/filter_dec" />
+    </RadioGroup>
+
+</LinearLayout>

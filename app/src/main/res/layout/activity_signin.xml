@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sign_gradient"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/sign_logo_dimen"
+            android:layout_height="@dimen/sign_logo_dimen"
+            android:layout_marginBottom="@dimen/sign_image_margin"
+            app:srcCompat="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/sign_et_email"
+            android:layout_width="@dimen/sign_login_width"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
+            android:background="@drawable/rounded_edit_text"
+            android:drawableStart="@drawable/sign_email"
+            android:drawablePadding="@dimen/sign_textbox_icon_padding"
+            android:hint="@string/sign_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/sign_textbox_padding"
+            android:textColor="@android:color/white" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_til_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sign_margin_10dp"
+            android:layout_marginBottom="@dimen/sign_margin_10dp"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sign_tiet_password"
+                android:layout_width="@dimen/sign_login_width"
+                android:layout_height="wrap_content"
+                android:autofillHints="AUTOFILL_HINT_PASSWORD"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableStart="@drawable/sign_password"
+                android:drawablePadding="@dimen/sign_textbox_icon_padding"
+                android:hint="@string/sign_password"
+                android:inputType="textPassword"
+                android:padding="@dimen/sign_textbox_padding"
+                android:textColor="@android:color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/sign_login_width"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/sign_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="AUTOFILL_HINT_USERNAME"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableStart="@drawable/profile"
+                android:drawablePadding="@dimen/sign_textbox_icon_padding"
+                android:hint="@string/sign_name"
+                android:inputType="textCapWords|textPersonName"
+                android:padding="@dimen/sign_textbox_padding"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/sign_tv_forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/sign_margin_10dp"
+                android:layout_marginBottom="@dimen/sign_margin_8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="@dimen/sign_forgot_pass_padding"
+                android:text="@string/sign_forgot_password" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sign_button_signin"
+            android:layout_width="@dimen/sign_login_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sign_margin_24dp"
+            android:layout_marginBottom="@dimen/sign_margin_24dp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/sign_login" />
+
+        <TextView
+            android:id="@+id/sign_tv_has_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/sign_margin_8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/sign_no_account" />
+
+        <ProgressBar
+            android:id="@+id/sign_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sign_margin_24dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>

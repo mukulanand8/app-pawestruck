@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#5D4037</color>
+    <color name="colorPrimaryDark">#321911</color>
+    <color name="colorPrimaryLight">#8D6E63</color>
+    <color name="colorAccent">#5D4037</color>
+    <color name="colorSecondary">#9CC157</color>
+    <color name="colorPassive">#EFEBE9</color>
+    <color name="signGradientCenter">#BCAAA4</color>
+
+</resources>

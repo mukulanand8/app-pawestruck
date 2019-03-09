@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/supp_tv_question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/supp_views_spacing"
+        android:layout_marginTop="@dimen/supp_views_spacing"
+        android:layout_marginEnd="@dimen/supp_views_spacing"
+        android:layout_marginBottom="@dimen/supp_views_spacing"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/supp_iv_expand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/supp_iv_expand"
+        android:layout_width="@dimen/supp_arrows"
+        android:layout_height="@dimen/supp_arrows"
+        android:layout_marginTop="@dimen/supp_views_spacing"
+        android:layout_marginEnd="@dimen/supp_views_spacing"
+        android:layout_marginBottom="@dimen/supp_views_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_up" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

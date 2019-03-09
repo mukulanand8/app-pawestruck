@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "601414697434",
+    "firebase_url": "https://app-pawestruck.firebaseio.com",
+    "project_id": "app-pawestruck",
+    "storage_bucket": "app-pawestruck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601414697434:android:2155d969ece86321",
+        "android_client_info": {
+          "package_name": "com.buffhello.pawestruck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601414697434-gomdm5pjbormhgu7ntpmbvklm8i3tm5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buffhello.pawestruck",
+            "certificate_hash": "ad4069805e084bc002e9ae88e72072eb37cf1151"
+          }
+        },
+        {
+          "client_id": "601414697434-hb944ohja1tv9dv3eep7ufpq7nmrj9jb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buffhello.pawestruck",
+            "certificate_hash": "40b94caea0729d10570b05794c4c08341aa45720"
+          }
+        },
+        {
+          "client_id": "601414697434-mcvdrbfq9t4lk7s4rbjql1pbpie7u7gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPwBng5W-bqD7Xh40t-KVkCrafRzeAJXM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601414697434-mcvdrbfq9t4lk7s4rbjql1pbpie7u7gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
