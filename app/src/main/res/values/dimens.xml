@@ -11,7 +11,7 @@
     <dimen name="sign_margin_8dp">8dp</dimen>
     <dimen name="sign_margin_10dp">10dp</dimen>
     <dimen name="sign_margin_24dp">24dp</dimen>
-    <dimen name="sign_forgot_pass_padding">10.5dp</dimen>
+    <dimen name="sign_forgot_pass_padding">10dp</dimen>
     <dimen name="sign_textbox_icon_padding">8dp</dimen>
     <dimen name="sign_textbox_padding">12dp</dimen>
     <dimen name="sign_logo_dimen">70dp</dimen>
