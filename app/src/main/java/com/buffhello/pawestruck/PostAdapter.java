@@ -359,6 +359,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                                                         postDetailsList.remove(postDetails);
                                                         userDetailsDisplayHashMap.clear();
                                                         notifyItemRemoved(holder.getAdapterPosition());
+                                                        notifyDataSetChanged();
                                                     }
                                                 });
                                             }
