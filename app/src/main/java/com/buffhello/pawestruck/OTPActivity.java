@@ -145,7 +145,7 @@ public class OTPActivity extends AppCompatActivity {
                         helperClass.displayToast(R.string.otp_verification_failure);
                     else if (e instanceof FirebaseAuthUserCollisionException)
                         helperClass.displayToast(R.string.otp_link_failure);
-                    else if (e.toString().equals("com.google.firebase.FirebaseException: User has already been linked to the given provider.")) {
+                    else if (e.toString().contains("User has already been linked to the given provider.")) {
                         mUser.updatePhoneNumber(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
