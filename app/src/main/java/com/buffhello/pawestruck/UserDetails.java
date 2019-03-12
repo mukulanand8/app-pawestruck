@@ -4,19 +4,22 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Keep;
+
 /**
  * POJO for a user's document in Firestore
  */
+@Keep
 public class UserDetails {
 
     private String name, emailId, phoneNum = null, address = null, profilePicUrl = null;
     private ArrayList<String> bookmarkIds = new ArrayList<>();
     private GeoPoint coOrdinates = null;
 
-    UserDetails() {
+    public UserDetails() {
     }
 
-    UserDetails(String name, String emailId) {
+    public UserDetails(String name, String emailId) {
         this.name = name;
         this.emailId = emailId;
     }
@@ -29,27 +32,27 @@ public class UserDetails {
         this.name = name;
     }
 
-    ArrayList<String> getBookmarkIds() {
+    public ArrayList<String> getBookmarkIds() {
         return bookmarkIds;
     }
 
-    String getEmailId() {
+    public String getEmailId() {
         return emailId;
     }
 
-    String getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    String getProfilePicUrl() {
+    public String getProfilePicUrl() {
         return profilePicUrl;
     }
 
-    GeoPoint getCoOrdinates() {
+    public GeoPoint getCoOrdinates() {
         return coOrdinates;
     }
 }

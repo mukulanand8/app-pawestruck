@@ -5,10 +5,13 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Keep;
+
 /**
  * POJO for a post in Firestore
  */
-class PostDetails {
+@Keep
+public class PostDetails {
 
     /**
      * Checks if card is expanded, post is bookmarked for a user
@@ -22,10 +25,10 @@ class PostDetails {
     private ArrayList<String> photoUrls;
     private String animal;
 
-    PostDetails() {
+    public PostDetails() {
     }
 
-    PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal) {
+    public PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal) {
         this.photoUrls = photoUrls;
         this.postedBy = postedBy;
         this.description = description;
@@ -35,55 +38,55 @@ class PostDetails {
         this.animal = animal;
     }
 
-    String getAnimal() {
+    public String getAnimal() {
         return animal;
     }
 
-    String getDocId() {
+    public String getDocId() {
         return docId;
     }
 
-    void setDocId(String docId) {
+    public void setDocId(String docId) {
         this.docId = docId;
     }
 
-    ArrayList<String> getPhotoUrls() {
+    public ArrayList<String> getPhotoUrls() {
         return photoUrls;
     }
 
-    String getPostedBy() {
+    public String getPostedBy() {
         return postedBy;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    boolean isExpanded() {
+    public boolean isExpanded() {
         return isExpanded;
     }
 
-    void setExpanded(boolean isExpanded) {
+    public void setExpanded(boolean isExpanded) {
         this.isExpanded = isExpanded;
     }
 
-    boolean isBookmarked() {
+    public boolean isBookmarked() {
         return isBookmarked;
     }
 
-    void setBookmarked(boolean isBookmarked) {
+    public void setBookmarked(boolean isBookmarked) {
         this.isBookmarked = isBookmarked;
     }
 
-    Timestamp getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    GeoPoint getCoOrdinates() {
+    public GeoPoint getCoOrdinates() {
         return coOrdinates;
     }
 
-    String getAddress() {
+    public String getAddress() {
         return address;
     }
 }
