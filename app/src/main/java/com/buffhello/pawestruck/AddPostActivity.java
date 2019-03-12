@@ -135,7 +135,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         String description = etDescription.getText().toString();
         String animal = spinnerAnimal.getSelectedItem().toString();
 
-        if ((filepaths.size() != 0) || !description.equals("") || !tvAddress.getText().toString().equals("")) {
+        if ((filepaths.size() != 0) && !description.equals("") && !tvAddress.getText().toString().equals("") && !tvAddress.getText().toString().equals("-")) {
             progressBar.setVisibility(View.VISIBLE);
             progressBar.requestFocus();
             final PostDetails postDetails = new PostDetails(new ArrayList<String>(), description, mFirebaseUser.getUid(), address, new Timestamp(new Date()), geoPoint, animal);
@@ -161,6 +161,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                baos = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
                                 ref.putBytes(baos.toByteArray()).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                     @Override
@@ -202,7 +203,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             });
         } else if (filepaths.size() == 0) helperClass.displayToast(R.string.addp_error_image);
         else if (description.equals("")) helperClass.displayToast(R.string.addp_error_description);
-        else if (tvAddress.getText().toString().equals(""))
+        else if (tvAddress.getText().toString().equals("") || tvAddress.getText().toString().equals("-"))
             helperClass.displayToast(R.string.addp_error_location);
     }
 
