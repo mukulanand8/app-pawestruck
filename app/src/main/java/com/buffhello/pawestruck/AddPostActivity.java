@@ -188,8 +188,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
                                                     while (postDetails.getPhotoUrls().size() == filepaths.size()) {
                                                         progressBar.setVisibility(View.GONE);
                                                         setResult(RESULT_OK);
-                                                        finish();
                                                         filepaths.clear();
+                                                        finish();
                                                     }
                                                 }
                                             });
