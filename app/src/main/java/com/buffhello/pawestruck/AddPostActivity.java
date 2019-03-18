@@ -52,6 +52,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
  * Appears when a signed in user clicks '+' on Home Fragment
@@ -100,6 +101,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         spinnerAnimal = findViewById(R.id.addp_spinner_animal);
         Button buttonPost = findViewById(R.id.addp_button_post);
         ImageView ivLocationEdit = findViewById(R.id.addp_iv_edit_address);
+        ConstraintLayout parent = findViewById(R.id.addp_parent);
 
         int maxWidth = getResources().getConfiguration().screenWidthDp;
         tvEmail.setMaxWidth(maxWidth);
@@ -112,6 +114,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         iv2.setOnClickListener(this);
         iv3.setOnClickListener(this);
         iv4.setOnClickListener(this);
+        parent.setOnClickListener(this);
 
         // Checks if user's profile has phone number and address
         userCollection.document(mFirebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -247,6 +250,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             ivToSet = iv4;
             imageindex = 3;
             startCropImageActivity(null);
+        } else if (v.getId() == R.id.addp_parent) {
+            helperClass.hideKeyboard(v);
         }
     }
 

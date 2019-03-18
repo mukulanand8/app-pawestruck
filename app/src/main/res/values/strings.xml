@@ -11,7 +11,7 @@
     <string name="acc_needed_bookmark">Please sign up or login to bookmark posts</string>
     <string name="acc_needed_report">Please sign up or login to report posts</string>
     <string name="acc_needed_post">Please sign up or login to put up a post</string>
-    <string name="acc_verify">Please verify your Email address or Mobile number to create a post</string>
+    <string name="acc_verify">Please verify your E-Mail address or Mobile number to create a post</string>
     <string name="bookmark_own">You can\'t unbookmark your own post</string>
     <string name="no_internet">Error: No Internet. Please enable WiFi or Mobile Data and try again</string>
     <string name="no_address">The user hasn\'t provided the location of the pet</string>
@@ -29,7 +29,7 @@
 
     <!--SignInActivity-->
     <string name="sign_name">Name</string>
-    <string name="sign_email">Email</string>
+    <string name="sign_email">E-Mail</string>
     <string name="sign_password">Password</string>
     <string name="sign_login">Login</string>
     <string name="sign_signup">Sign Up</string>
@@ -38,10 +38,11 @@
     <string name="sign_remember_password"><u>Oh wait, now I remember!</u></string>
     <string name="sign_reset_password">Reset Password</string>
     <string name="sign_forgot_password"><u>Forgot password?</u></string>
-    <string name="sign_bad_email">Error: Enter a valid Email address</string>
+    <string name="sign_bad_email">Error: Enter a valid E-Mail address</string>
     <string name="sign_bad_password">Error: Password too short (Minimum 8 characters)</string>
     <string name="sign_bad_username">Error: Username can\'t be empty</string>
-    <string name="sign_incorrect">Error: The user doesn\'t exist. Please sign up!</string>
+    <string name="sign_err_pass">Error: Incorrect Password</string>
+    <string name="sign_err_user">Error: The user doesn\'t exist. Please sign up!</string>
     <string name="sign_reset_password_sent">An e-mail has been sent to reset your password</string>
     <string name="sign_email_verify">An e-mail has been sent to verify your account</string>
 
@@ -49,8 +50,8 @@
     <string name="addp_error_image">Please upload at least one image</string>
     <string name="addp_error_description">Please enter the description</string>
     <string name="addp_error_location">Please pick a location</string>
-    <string name="addp_description">Post Description - Age, Behavioural Traits, Vaccination Status, Sterilisation Status etc.
-        (Max 1000 characters)</string>
+    <string name="addp_description">Post Description - Age, Behavioural Traits, Vaccination Details, Sterilisation Status, Provision
+        of Health Card etc. (Max 1000 characters)</string>
     <string name="addp_pet_image">Pet Image</string>
     <string name="addp_edit_location">Edit Location of Pet</string>
     <string name="addp_post">Post</string>
@@ -99,6 +100,8 @@
     <string name="prof_email_status">Email Verification Status</string>
     <string name="prof_edit_phone">Edit Phone Number</string>
     <string name="prof_edit_location">Edit Location</string>
+    <string name="prof_verified">Your e-mail address has been verified</string>
+    <string name="prof_unverified">Your e-mail address hasn\'t been verified. Please click the link in the mail we\'ve sent to verify</string>
 
     <!--PostAdapter-->
     <string name="post_report">Report Post</string>
@@ -150,13 +153,15 @@
         in good health with vaccinations up-to-date.\n\n3. In case of a senior dog or a cat, please
         spay/neuter (sterilise) him/her so that he/she doesn\'t end up getting exploited by a breeder.\n\n4.
         Give your pet up responsibly! It is up to you to find safe hands to take care of your pet. Remember,
-        animals have feelings too!\n\nFailure in following these rules could result in a permanent ban.
-        Thank you for going through this long section and sticking to the rules! Here, have a treat! &#127850;</string>
+        animals have feelings too!\n\n5. If you\'re an adopter, note that posts specifying the inclusion of a
+        health card are more credible.\n\nThank you for going through this long section and sticking to the rules!
+        Here, have a treat! &#127850;</string>
     <string name="supp_answer3">A female cat or dog can give birth up to thrice a year with each litter having about
-        7 little ones. Theoretically, this <b>one</b> cat/dog could result in the birth of over 11,000 cats/dogs a year!
-        Is it ethical to allow litters of pups or kittens to be born knowing that they wouldn\'t survive past few days?
-        And who\'d look after the offspring when your pet mates? Sterilisation also reduces aggression and lowers the
-        risk of certain diseases. We support this humane action \"for the greater good\".</string>
+        7 little ones. Theoretically, this <b>one</b> cat/dog (with each offspring, their offspring and so on…)
+        could result in the birth of over 11,000 cats/dogs a year! Is it ethical to allow litters of pups or kittens
+        to be born knowing that they wouldn\'t survive past few days? And who\'d look after the offspring when your
+        pet mates? Sterilisation also reduces aggression and lowers the risk of certain diseases. We support this
+        humane action \"for the greater good\".</string>
     <string name="supp_answer4">Well, would you like to see an animal suffer? Neither do we. Sadly, in a lot of
         places, breeders take hold of animals, lock them up in a dark place, load them with drugs, force them to give
         birth over and over again while their innocent little ones are sold. Then, once they are sick or can no longer
@@ -174,7 +179,7 @@
         Username, E-mail and Password will do!</string>
     <string name="supp_answer8">Yes, we\'d encourage using a single account for an organization
         instead of different individual accounts representing the same organization.</string>
-    <string name="supp_answer9">No biggie! You need to verify either your email address or phone number to post.
+    <string name="supp_answer9">No biggie! You need to verify either your e-mail address or phone number to post.
         On signing up, you will be sent a link to verify your account. You could either verify via the link or
         click the <i>Edit</i> icon next to phone number in the Profile page and verify your phone number via OTP.
         Please note that a verified phone number will be displayed in the post publicly.</string>
@@ -194,7 +199,7 @@
         Data or WiFi) that you\'re using is poor. Please let us know if the error persists despite a good connection by
         mailing us at pawestruckapp@gmail.com.</string>
     <string name="supp_answer16">Wait! Please don\'t! If you have any queries, suggestions or bug reports,
-        we\'d be happy to hear you out and assist! E-mail us at pawestruckapp@gmail.com.</string>
+        we\'d be happy to hear you out and assist! Mail us at pawestruckapp@gmail.com.</string>
 
     <!--FilterAlertDialog-->
     <string name="filter_by">Filter by</string>

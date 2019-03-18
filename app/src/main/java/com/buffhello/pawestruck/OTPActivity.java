@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,11 +59,19 @@ public class OTPActivity extends AppCompatActivity {
         EditText etMobile = findViewById(R.id.otp_et_mobile);
         Button buttonSend = findViewById(R.id.otp_button_send);
         Button buttonVerify = findViewById(R.id.otp_button_verify);
+        LinearLayout parent = findViewById(R.id.otp_parent);
 
         // Links EditText mobile number field to Country Code Picker
         ccp.registerCarrierNumberEditText(etMobile);
 
         firebaseVerification();
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helperClass.hideKeyboard(v);
+            }
+        });
 
         // Sends the OTP if Internet is available and entered mobile number is valid
         buttonSend.setOnClickListener(new View.OnClickListener() {

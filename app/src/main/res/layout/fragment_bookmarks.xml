@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/mark_sides_margin"
         android:layout_marginEnd="@dimen/mark_sides_margin"
-        android:layout_marginBottom="@dimen/supp_padding_bot"
+        android:layout_marginBottom="@dimen/padding_bot"
         android:text="@string/mark_none"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -24,6 +24,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mark_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/padding_bot"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,15 +3,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/otp_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/otp_padding">
+        android:paddingStart="@dimen/otp_padding"
+        android:paddingEnd="@dimen/otp_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,6 +39,13 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/otp_views_spacing"
+            android:text="@string/otp_message"
+            android:textAlignment="center" />
+
         <Button
             android:id="@+id/otp_button_send"
             android:layout_width="wrap_content"
@@ -44,12 +53,6 @@
             android:layout_marginTop="@dimen/otp_views_spacing"
             android:background="@drawable/rounded_button"
             android:text="@string/otp_send" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/otp_views_spacing"
-            android:text="@string/otp_message" />
 
         <EditText
             android:id="@+id/otp_et_code"
@@ -60,14 +63,6 @@
             android:hint="@string/otp_code"
             android:inputType="number" />
 
-        <Button
-            android:id="@+id/otp_button_verify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/otp_views_spacing"
-            android:background="@drawable/rounded_button"
-            android:text="@string/otp_verify" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -75,6 +70,14 @@
             android:layout_marginTop="@dimen/otp_views_spacing"
             android:text="@string/otp_note"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/otp_button_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/otp_views_spacing"
+            android:background="@drawable/rounded_button"
+            android:text="@string/otp_verify" />
 
         <ProgressBar
             android:id="@+id/otp_progress"

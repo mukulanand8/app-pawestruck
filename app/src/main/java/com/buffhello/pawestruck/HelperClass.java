@@ -1,9 +1,12 @@
 package com.buffhello.pawestruck;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -72,6 +75,14 @@ class HelperClass {
                 Glide.with(mContext).load(image).apply(new RequestOptions().placeholder(R.drawable.placeholder)).into(imageView);
             }
         }).withHiddenStatusBar(false).withStartPosition(startPosition).show();
+    }
+
+    /**
+     * Hides the soft keyboard when clicked elsewhere
+     */
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) mContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }

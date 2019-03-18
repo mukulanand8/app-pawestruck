@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final int ADDPREQCODE = 123;
     private boolean isRefreshing = false;
     private double latitude = -1, longitude = -1;
+    private int filterCache = -1, animalCache = -1, sortCache = -1;
 
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth mAuth;
@@ -147,14 +149,30 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             LayoutInflater inflater = getActivity().getLayoutInflater();
             final View dialogView = inflater.inflate(R.layout.dialog_filter, null);
             actvUser = dialogView.findViewById(R.id.filt_actv_user);
+            LinearLayout parent = dialogView.findViewById(R.id.filt_parent);
             final RadioGroup rgSortOrder = dialogView.findViewById(R.id.filt_rg_sort);
             final RadioGroup rgAnimal = dialogView.findViewById(R.id.filt_rg_animal);
             final Spinner filtSpinner = dialogView.findViewById(R.id.filt_spinner);
+
+            parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helperClass.hideKeyboard(v);
+                }
+            });
+
+            if (filterCache != -1) filtSpinner.setSelection(filterCache);
+            if (animalCache != -1) rgAnimal.check(animalCache);
+            if (sortCache != -1) rgSortOrder.check(sortCache);
+
             filtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     Object item = parent.getSelectedItem().toString();
-                    if (item.equals("User")) {
+                    if (item.equals("Animal")) {
+                        actvUser.setVisibility(View.GONE);
+                        rgAnimal.setVisibility(View.VISIBLE);
+                    } else if (item.equals("User")) {
                         actvUser.setVisibility(View.VISIBLE);
                         rgAnimal.setVisibility(View.GONE);
                         fillActvUser();
@@ -167,17 +185,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         rgAnimal.setVisibility(View.GONE);
                         getLocation();
                         actvUser.setHint(R.string.filter_radius);
-                    } else if (item.equals("Gender")) {
-                        Intent intent = new Intent(mContext, DiscourageActivity.class);
-                        intent.putExtra("isGender", true);
-                        startActivity(intent);
                     } else if (item.equals("Breed")) {
                         Intent intent = new Intent(mContext, DiscourageActivity.class);
                         intent.putExtra("isGender", false);
                         startActivity(intent);
-                    } else if (item.equals("Animal")) {
-                        actvUser.setVisibility(View.GONE);
-                        rgAnimal.setVisibility(View.VISIBLE);
+                    } else if (item.equals("Gender")) {
+                        Intent intent = new Intent(mContext, DiscourageActivity.class);
+                        intent.putExtra("isGender", true);
+                        startActivity(intent);
                     }
                 }
 
@@ -195,18 +210,32 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     String filterType = filtSpinner.getSelectedItem().toString();
                     final String value = actvUser.getText().toString().trim();
                     int selectedId = rgSortOrder.getCheckedRadioButtonId();
+                    sortCache = selectedId;
                     RadioButton rbOrder = dialogView.findViewById(selectedId);
                     final String sortOrder = rbOrder.getText().toString();
                     switch (filterType) {
+                        case "Animal":
+                            int animalID = rgAnimal.getCheckedRadioButtonId();
+                            animalCache = animalID;
+                            filterCache = 0;
+                            if (animalID != -1) {
+                                RadioButton rbAnimal = dialogView.findViewById(animalID);
+                                String animal = rbAnimal.getText().toString();
+                                feedFillAnimal(animal, sortOrder);
+                            } else feedFillBasic(sortOrder);
+                            break;
                         case "User":
+                            filterCache = 1;
                             if (value.equals("")) feedFillBasic(sortOrder);
                             else feedFillUser(value, sortOrder);
                             break;
                         case "Address":
+                            filterCache = 2;
                             if (value.equals("")) feedFillBasic(sortOrder);
                             else feedFillAddress(value, sortOrder);
                             break;
                         case "Radius (Testing)":
+                            filterCache = 3;
                             if (value.equals("")) feedFillBasic(sortOrder);
                             else {
                                 getLocation();
@@ -220,14 +249,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                     helperClass.displayToast(R.string.error_fetch_location);
                                 else feedFillDistance(value, sortOrder);
                             }
-                            break;
-                        case "Animal":
-                            int animalID = rgAnimal.getCheckedRadioButtonId();
-                            if (animalID != -1) {
-                                RadioButton rbAnimal = dialogView.findViewById(animalID);
-                                String animal = rbAnimal.getText().toString();
-                                feedFillAnimal(animal, sortOrder);
-                            } else feedFillBasic(sortOrder);
                             break;
                     }
                 }

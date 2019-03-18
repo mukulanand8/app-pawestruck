@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment {
         Button buttonSignOut = view.findViewById(R.id.prof_button_signout);
         ImageView ivPhoneVerify = view.findViewById(R.id.prof_iv_edit_phone);
         ImageView ivLocationVerify = view.findViewById(R.id.prof_iv_edit_address);
-        ImageView ivEmailVerified = view.findViewById(R.id.prof_iv_email_status);
+        final ImageView ivEmailVerified = view.findViewById(R.id.prof_iv_email_status);
         FloatingActionButton changeProfilePic = view.findViewById(R.id.prof_fab_dp_change);
         profilePic = view.findViewById(R.id.prof_iv_dp);
         tvName = view.findViewById(R.id.prof_tv_name);
@@ -160,6 +160,15 @@ public class ProfileFragment extends Fragment {
             if (!mSharedPreferences.getString("profilePicUrl", "").equals(""))
                 Glide.with(getActivity().getApplicationContext()).load(mSharedPreferences.getString("profilePicUrl", "")).apply(new RequestOptions().placeholder(R.drawable.profile).override(DP_SIZE).circleCrop()).into(profilePic);
         }
+
+        ivEmailVerified.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mFirebaseUser.isEmailVerified())
+                    helperClass.displayToast(R.string.prof_verified);
+                else helperClass.displayToast(R.string.prof_unverified);
+            }
+        });
 
         // Pops up profile picture if available
         profilePic.setOnClickListener(new View.OnClickListener() {

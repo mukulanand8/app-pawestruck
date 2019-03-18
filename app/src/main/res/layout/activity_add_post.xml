@@ -6,13 +6,14 @@
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addp_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/addp_views_spacing">
 
         <HorizontalScrollView
             android:id="@+id/addp_hsv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@+id/addp_et_description"
@@ -180,31 +181,31 @@
 
         </androidx.gridlayout.widget.GridLayout>
 
+        <TextView
+            android:id="@+id/addp_tv_note"
+            android:layout_width="@dimen/sign_login_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/addp_margin"
+            android:text="@string/addp_note"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addp_grid" />
+
         <Button
             android:id="@+id/addp_button_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/addp_margin"
-            android:layout_marginTop="@dimen/addp_margin"
+            android:layout_marginTop="@dimen/addp_progress"
             android:layout_marginEnd="@dimen/addp_margin"
             android:background="@drawable/rounded_button"
             android:text="@string/addp_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addp_grid" />
-
-        <TextView
-            android:id="@+id/addp_tv_note"
-            android:layout_width="@dimen/sign_login_width"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/addp_progress"
-            android:text="@string/addp_note"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addp_button_post" />
+            app:layout_constraintTop_toBottomOf="@+id/addp_tv_note" />
 
         <ProgressBar
             android:id="@+id/addp_progress"
@@ -219,7 +220,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addp_tv_note" />
+            app:layout_constraintTop_toBottomOf="@+id/addp_button_post" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

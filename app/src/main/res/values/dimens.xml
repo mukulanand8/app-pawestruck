@@ -33,8 +33,8 @@
     <!--SupportFragment-->
     <dimen name="supp_views_spacing">8dp</dimen>
     <dimen name="supp_child_margin">12dp</dimen>
-    <dimen name="supp_padding_bot">130dp</dimen>
     <dimen name="supp_arrows">24dp</dimen>
+    <dimen name="supp_padding_bot">130dp</dimen>
 
     <!--ProfileFragment-->
     <dimen name="prof_dp">150dp</dimen>
@@ -68,5 +68,6 @@
     <!--Others-->
     <dimen name="rounded_curve">30dp</dimen>
     <dimen name="card_font_size">15sp</dimen>
+    <dimen name="padding_bot">75dp</dimen>
 
 </resources>

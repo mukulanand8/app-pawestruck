@@ -7,9 +7,8 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/home_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPassive"
-        android:paddingBottom="@dimen/card_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -55,8 +54,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/padding_bot" />
+
         </LinearLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
@@ -65,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/mark_sides_margin"
         android:layout_marginEnd="@dimen/mark_sides_margin"
-        android:paddingBottom="@dimen/supp_padding_bot"
+        android:paddingBottom="@dimen/padding_bot"
         android:text="@string/home_none"
         android:textAlignment="center"
         android:textSize="16sp"

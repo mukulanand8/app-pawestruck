@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -57,6 +59,7 @@ public class SignInActivity extends AppCompatActivity {
         helperClass = new HelperClass(mContext);
 
         progressBar = findViewById(R.id.sign_progress);
+        LinearLayout parent = findViewById(R.id.sign_parent);
         final TextView tvAccountYN = findViewById(R.id.sign_tv_has_account);
         final TextView tvForgotPassword = findViewById(R.id.sign_tv_forgot_pass);
         final EditText etUsername = findViewById(R.id.sign_et_name);
@@ -70,6 +73,13 @@ public class SignInActivity extends AppCompatActivity {
         final float left = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -maxWidth, getResources().getDisplayMetrics());
         final float right = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, maxWidth, getResources().getDisplayMetrics());
         final float mid = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helperClass.hideKeyboard(v);
+            }
+        });
 
         tvAccountYN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,7 +228,9 @@ public class SignInActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 } else if (task.getException() instanceof FirebaseAuthInvalidUserException)
-                    helperClass.displayToast(R.string.sign_incorrect);
+                    helperClass.displayToast(R.string.sign_err_user);
+                else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                    helperClass.displayToast(R.string.sign_err_pass);
                 else helperClass.displayToast(task.getException().toString());
                 progressBar.setVisibility(View.GONE);
             }

@@ -412,13 +412,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
     }
 
     /**
-     * Email intent
+     * Email intent that only email apps should handle
      */
     private void emailIntent(String emailid) {
         String emailIds[] = new String[1];
         emailIds[0] = emailid;
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("plain/text");
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, emailIds);
         if (intent.resolveActivity(mContext.getPackageManager()) != null)
             mContext.startActivity(intent);
