@@ -1,10 +1,19 @@
 package com.buffhello.pawestruck;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,6 +21,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -25,8 +35,30 @@ public class SupportFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_supp, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * Shows Terms and Conditions and Privacy Policy
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.information) {
+            final SpannableString s = new SpannableString(getString(R.string.supp_info));
+            Linkify.addLinks(s, Linkify.WEB_URLS);
+            AlertDialog dialogBuilder = new AlertDialog.Builder(getContext()).setMessage(s).show();
+            ((TextView) dialogBuilder.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         HashMap<String, List<String>> bind = new HashMap<>();
         List<String> parent = Arrays.asList(getResources().getStringArray(R.array.supp_questions));

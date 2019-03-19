@@ -27,3 +27,5 @@
   public *;
 }
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+-keepattributes Signature
+-keepattributes *Annotation*

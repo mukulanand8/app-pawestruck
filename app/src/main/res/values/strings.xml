@@ -5,6 +5,7 @@
     <string name="title_contact_verification">Contact Verification</string>
     <string name="title_filter">Filter</string>
     <string name="title_add_post">Add Post</string>
+    <string name="title_information">Information</string>
     <string name="title_choose_image_dp">Choose Display Picture</string>
     <string name="title_choose_image_pet">Choose Pet Image</string>
     <string name="acc_needed_profile">Please sign up or login to view your Profile</string>
@@ -113,7 +114,8 @@
     <string name="home_no_internet">Error: No Internet. Please enable WiFi or Mobile Data to view the refreshed list!</string>
     <string name="home_none">Oops! No post matches your filter criteria!</string>
     <string name="home_error_distance">Error: Enter a whole number between 0 and 20038 (maximum possible distance)</string>
-    <string name="home_welcome">Hello there! Thanks for downloading our app! Please head over to the FAQ section
+    <string name="home_welcome">Hello there! Thanks for downloading our app! By using this app, you consent
+        to our Privacy Policy and Terms and Conditions at https://sites.google.com/view/pawestruck. Please head over to the FAQ section
         in the paw-menu at the bottom and go through the rules for using the app. Remember, this platform is
         <b>strictly for ethical adoptions!</b> Welcome to Pawestruck! Swipe down to dismiss me</string>
     <string name="home_exit">Press Back again to exit</string>
@@ -123,6 +125,7 @@
         by default, appear here too. If your bookmarks aren\'t appearing, wait a bit longer please!</string>
 
     <!--SupportFragment-->
+    <string name="supp_info">You can view our Privacy Policy and Terms and Conditions at https://sites.google.com/view/pawestruck</string>
     <string-array name="supp_questions">
         <item>What is the point of Pawestruck?</item>
         <item>Rules for using Pawestruck:</item>

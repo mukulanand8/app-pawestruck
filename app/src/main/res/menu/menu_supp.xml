@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.buffhello.pawestruck.MainActivity">
+
+    <item
+        android:id="@+id/information"
+        android:icon="@drawable/information"
+        android:title="@string/title_information"
+        app:showAsAction="ifRoom" />
+
+</menu>

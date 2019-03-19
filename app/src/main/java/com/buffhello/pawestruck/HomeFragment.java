@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -546,6 +547,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         globalView = view;
         tvNone = view.findViewById(R.id.home_tv_none);
+
+        TextView tvWelcome = view.findViewById(R.id.home_tv_welcome);
+        tvWelcome.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Uses SharedPreferences to display the first time open Welcome Card
         cardWelcome = view.findViewById(R.id.home_card_welcome);
