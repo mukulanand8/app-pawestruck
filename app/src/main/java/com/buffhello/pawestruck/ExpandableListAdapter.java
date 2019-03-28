@@ -76,14 +76,21 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         LayoutInflater parentInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = parentInflater.inflate(R.layout.supp_list_parent, null);
 
-        TextView tvParent = convertView.findViewById(R.id.supp_tv_question);
-        tvParent.setText((String) getGroup(groupPosition));
+        if (groupPosition == 0 || groupPosition == 3 || groupPosition == 10 || groupPosition == 15) {
+            convertView = parentInflater.inflate(R.layout.supp_category, null);
+            TextView tvCategory = convertView.findViewById(R.id.supp_tv_category);
+            tvCategory.setText((String) getGroup(groupPosition));
+        } else {
+            convertView = parentInflater.inflate(R.layout.supp_list_parent, null);
 
-        ImageView ivExpanded = convertView.findViewById(R.id.supp_iv_expand);
-        if (isExpanded) ivExpanded.setImageResource(R.drawable.arrow_up);
-        else ivExpanded.setImageResource(R.drawable.arrow_down);
+            TextView tvParent = convertView.findViewById(R.id.supp_tv_question);
+            tvParent.setText((String) getGroup(groupPosition));
+
+            ImageView ivExpanded = convertView.findViewById(R.id.supp_iv_expand);
+            if (isExpanded) ivExpanded.setImageResource(R.drawable.arrow_up);
+            else ivExpanded.setImageResource(R.drawable.arrow_down);
+        }
 
         return convertView;
     }
@@ -94,11 +101,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater childInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = childInflater.inflate(R.layout.supp_list_child, null);
 
-        TextView tvChild = convertView.findViewById(R.id.supp_tv_answer);
-        tvChild.setText((String) getChild(groupPosition, 0));
+        if (groupPosition != 0 && groupPosition != 3 && groupPosition != 10 && groupPosition != 15) {
+            convertView = childInflater.inflate(R.layout.supp_list_child, null);
 
+            TextView tvChild = convertView.findViewById(R.id.supp_tv_answer);
+            tvChild.setText((String) getChild(groupPosition, 0));
+        } else convertView = childInflater.inflate(R.layout.view_null, null);
         return convertView;
     }
 

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPassive"
-    android:paddingLeft="@dimen/supp_views_spacing"
-    android:paddingRight="@dimen/supp_views_spacing">
+    android:paddingLeft="@dimen/supp_child_margin"
+    android:paddingRight="@dimen/supp_child_margin">
 
     <TextView
         android:id="@+id/supp_tv_answer"

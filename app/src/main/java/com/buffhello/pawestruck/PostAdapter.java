@@ -79,6 +79,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
         holder.description.setText(postDetails.getDescription());
         if (postDetails.getAddress() != null) holder.location.setText(postDetails.getAddress());
 
+        // Sets Report/Delete button
         if (mFirebaseUser != null) {
             if (postDetails.getPostedBy().equalsIgnoreCase(mFirebaseUser.getUid())) {
                 holder.buttonRprtDel.setText(R.string.post_delete);

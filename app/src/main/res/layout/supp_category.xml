@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:focusable="false"
+    android:orientation="horizontal"
+    android:padding="@dimen/supp_child_margin">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/supp_tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/supp_child_margin"
+        android:layout_marginEnd="@dimen/supp_child_margin"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary" />
+
+</LinearLayout>
