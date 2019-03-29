@@ -105,6 +105,7 @@
     <string name="prof_unverified">Your e-mail address hasn\'t been verified. Please click the link in the mail we\'ve sent to verify</string>
 
     <!--PostAdapter-->
+    <string name="post_adopted">Mark as Adopted</string>
     <string name="post_report">Report Post</string>
     <string name="post_report_prompt">Are you sure you want to report this post?</string>
     <string name="post_delete">Delete Post</string>

@@ -84,9 +84,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             if (postDetails.getPostedBy().equalsIgnoreCase(mFirebaseUser.getUid())) {
                 holder.buttonRprtDel.setText(R.string.post_delete);
                 holder.buttonRprtDel.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.card_delete, 0, 0, 0);
+                holder.buttonAdopted.setVisibility(View.VISIBLE);
             } else {
                 holder.buttonRprtDel.setText(R.string.post_report);
                 holder.buttonRprtDel.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.card_report, 0, 0, 0);
+                holder.buttonAdopted.setVisibility(View.GONE);
             }
         }
 
@@ -281,6 +283,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             }
         });
 
+        holder.buttonAdopted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
+
         // By default, the button shows "Report Post". Can report only if the user has signed in
         holder.buttonRprtDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -452,7 +461,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
         private LinearLayout subItem;
         private FloatingActionButton fabBookmark, fabEmailTop, fabCallTop, fabLocationTop, fabEmailBot, fabCallBot, fabLocationBot;
         private ArrayList<ImageView> photoUrls = new ArrayList<>();
-        private Button buttonRprtDel;
+        private Button buttonRprtDel, buttonAdopted;
         private ProgressBar progressBar;
 
         FeedViewHolder(View itemView) {
@@ -481,6 +490,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             imgExpand = itemView.findViewById(R.id.card_iv_expand);
             fabBookmark = itemView.findViewById(R.id.card_fab_bookmark);
             buttonRprtDel = itemView.findViewById(R.id.card_button_del_rep);
+            buttonAdopted = itemView.findViewById(R.id.card_button_adopted);
             progressBar = itemView.findViewById(R.id.card_progress);
 
             int maxWidth = mContext.getResources().getConfiguration().screenWidthDp * 2;

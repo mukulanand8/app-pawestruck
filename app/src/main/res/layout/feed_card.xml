@@ -225,11 +225,28 @@
             </androidx.gridlayout.widget.GridLayout>
 
             <Button
-                android:id="@+id/card_button_del_rep"
+                android:id="@+id/card_button_adopted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_margin"
                 android:layout_marginTop="@dimen/card_button_margin"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:background="@drawable/rounded_button_green"
+                android:clickable="true"
+                android:drawableStart="@drawable/card_adopted"
+                android:focusable="true"
+                android:paddingStart="80dp"
+                android:paddingEnd="80dp"
+                android:text="@string/post_adopted"
+                android:textColor="@color/quantum_googgreen500"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/card_button_del_rep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginTop="@dimen/card_margin"
                 android:layout_marginEnd="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_button_margin"
                 android:background="@drawable/rounded_button_red"
