@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-clearcut:16.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-play-services-clearcut-16.0.0.aar/908a76c6e3222e4dbf87c77577e3bf66/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-play-services-clearcut-16.0.0.aar/908a76c6e3222e4dbf87c77577e3bf66/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-play-services-clearcut-16.0.0.aar/76bc20e7a7f3daab9c555d3d97e7f1c0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-play-services-clearcut-16.0.0.aar/76bc20e7a7f3daab9c555d3d97e7f1c0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

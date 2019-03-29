@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "601414697434-p074khvg2r5jqsgl0osi1ks9hnb0k5tm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buffhello.pawestruck",
+            "certificate_hash": "9ecb9452ef343aeff3caa9f1b08d13cb1780a979"
+          }
+        },
+        {
           "client_id": "601414697434-mcvdrbfq9t4lk7s4rbjql1pbpie7u7gi.apps.googleusercontent.com",
           "client_type": 3
         }
