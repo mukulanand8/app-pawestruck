@@ -141,7 +141,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         if ((filepaths.size() != 0) && !description.equals("") && !tvAddress.getText().toString().equals("") && !tvAddress.getText().toString().equals("-")) {
             progressBar.setVisibility(View.VISIBLE);
             progressBar.requestFocus();
-            final PostDetails postDetails = new PostDetails(new ArrayList<String>(), description, mFirebaseUser.getUid(), address, new Timestamp(new Date()), geoPoint, animal);
+            final PostDetails postDetails = new PostDetails(new ArrayList<String>(), description, mFirebaseUser.getUid(), address, new Timestamp(new Date()), geoPoint, animal, false);
 
             // Adds to Firestore
             petCollection.add(postDetails).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

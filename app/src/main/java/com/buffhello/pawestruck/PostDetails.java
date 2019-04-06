@@ -24,11 +24,12 @@ public class PostDetails {
     private GeoPoint coOrdinates;
     private ArrayList<String> photoUrls;
     private String animal;
+    private Boolean adopted;
 
     public PostDetails() {
     }
 
-    public PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal) {
+    public PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal, Boolean adopted) {
         this.photoUrls = photoUrls;
         this.postedBy = postedBy;
         this.description = description;
@@ -36,6 +37,15 @@ public class PostDetails {
         this.timestamp = timestamp;
         this.coOrdinates = coOrdinates;
         this.animal = animal;
+        this.adopted = adopted;
+    }
+
+    public Boolean getAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(Boolean adopted) {
+        this.adopted = adopted;
     }
 
     public String getAnimal() {

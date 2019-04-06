@@ -13,10 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +31,6 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +56,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private CollectionReference petCollection = firestore.collection("pets");
     private CollectionReference userCollection = firestore.collection("users");
-    private CollectionReference reportedCollection = firestore.collection("reportedPosts");
+    private CollectionReference reportedPostsCollection = firestore.collection("reportedPosts");
+    private CollectionReference adoptedPetsCollection = firestore.collection("adoptedPets");
+    private CollectionReference deletedPostsCollection = firestore.collection("deletedPosts");
+
+
 
     public PostAdapter(Context mContext, List<PostDetails> postDetailsList) {
         PostAdapter.mContext = mContext;
@@ -298,7 +305,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                 // Reports the post
                 if (holder.buttonRprtDel.getText().equals(mContext.getResources().getString(R.string.post_report))) {
                     if (mFirebaseUser != null) {
-                        final DocumentReference addpropicurl = reportedCollection.document(postDetails.getDocId());
+                        final DocumentReference addpropicurl = reportedPostsCollection.document(postDetails.getDocId());
                         new AlertDialog.Builder(mContext).setTitle(R.string.post_report).setMessage(R.string.post_report_prompt).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 holder.progressBar.setVisibility(View.VISIBLE);
@@ -346,35 +353,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                             holder.progressBar.setVisibility(View.VISIBLE);
                             holder.progressBar.requestFocus();
 
-                            // Deletes from reportedPosts collection if it exists
-                            reportedCollection.document(postDetails.getDocId()).delete();
+                            moveFirestoreDocument(petCollection.document(postDetails.getDocId()), deletedPostsCollection.document(postDetails.getDocId()));
 
-                            // Deletes from pets collection
-                            petCollection.document(postDetails.getDocId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            // Removes the post from user's bookmark list
+                            userCollection.document(mFirebaseUser.getUid()).update("bookmarkIds", FieldValue.arrayRemove(postDetails.getDocId())).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    for (String url : postDetails.getPhotoUrls()) {
-                                        StorageReference storageReference = firebaseStorage.getReferenceFromUrl(url);
-
-                                        // Deletes pet images from Storage
-                                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-
-                                                // Removes the post from user's bookmark list
-                                                userCollection.document(mFirebaseUser.getUid()).update("bookmarkIds", FieldValue.arrayRemove(postDetails.getDocId())).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        holder.progressBar.setVisibility(View.GONE);
-                                                        postDetailsList.remove(postDetails);
-                                                        userDetailsDisplayHashMap.clear();
-                                                        notifyItemRemoved(holder.getAdapterPosition());
-                                                        notifyDataSetChanged();
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
+                                    holder.progressBar.setVisibility(View.GONE);
+                                    postDetailsList.remove(postDetails);
+                                    userDetailsDisplayHashMap.clear();
+                                    notifyItemRemoved(position);
+                                    notifyItemRangeRemoved(position, getItemCount());
                                 }
                             });
                         }
@@ -382,6 +371,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                 }
             }
         });
+
 
         // Handles card expansion
         boolean isExpanded = postDetails.isExpanded();
@@ -405,6 +395,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                 boolean isExpanded = postDetails.isExpanded();
                 postDetails.setExpanded(!isExpanded);
                 notifyDataSetChanged();
+            }
+        });
+
+        holder.buttonAdopted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                petCollection.document(postDetails.getDocId()).update("adopted", true);
+                copyFirestoreDocument(petCollection.document(postDetails.getDocId()), adoptedPetsCollection.document(postDetails.getDocId()));
+
             }
         });
     }
@@ -449,6 +448,84 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
     @Override
     public int getItemCount() {
         return postDetailsList.size();
+    }
+
+    public void moveFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
+        fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        toPath.set(document.getData())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        displayToast("DocumentSnapshot successfully written!");
+                                        fromPath.delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        displayToast("DocumentSnapshot successfully deleted!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        displayToast("Error deleting document");
+                                                    }
+                                                });
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        displayToast("Error writing document" + e.toString());
+                                    }
+                                });
+                    } else {
+                        displayToast("No such document");
+                    }
+                } else {
+                    displayToast("get failed with " + task.getException().toString());
+                }
+            }
+        });
+    }
+
+
+    public void copyFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
+        fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        toPath.set(document.getData())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        displayToast("DocumentSnapshot successfully written!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        displayToast("Error writing document");
+                                    }
+                                });
+                    } else {
+                        displayToast("No such document");
+                    }
+                } else {
+                    displayToast("get failed with ");
+                }
+            }
+        });
+    }
+
+    public void displayToast(String toast) {
+        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     /**
