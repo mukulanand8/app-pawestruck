@@ -16,7 +16,7 @@ public class PostDetails {
     /**
      * Checks if card is expanded, post is bookmarked for a user
      */
-    private boolean isExpanded, isBookmarked;
+    private boolean isExpanded, isBookmarked, adopted;
 
     private String postedBy, description, address;
     private String docId = null;
@@ -24,12 +24,11 @@ public class PostDetails {
     private GeoPoint coOrdinates;
     private ArrayList<String> photoUrls;
     private String animal;
-    private Boolean adopted;
 
     public PostDetails() {
     }
 
-    public PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal, Boolean adopted) {
+    public PostDetails(ArrayList<String> photoUrls, String description, String postedBy, String address, Timestamp timestamp, GeoPoint coOrdinates, String animal, boolean adopted) {
         this.photoUrls = photoUrls;
         this.postedBy = postedBy;
         this.description = description;
@@ -40,11 +39,11 @@ public class PostDetails {
         this.adopted = adopted;
     }
 
-    public Boolean getAdopted() {
+    public boolean isAdopted() {
         return adopted;
     }
 
-    public void setAdopted(Boolean adopted) {
+    public void setAdopted(boolean adopted) {
         this.adopted = adopted;
     }
 

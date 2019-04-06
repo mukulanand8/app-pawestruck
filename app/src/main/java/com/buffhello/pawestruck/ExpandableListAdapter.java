@@ -77,7 +77,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         LayoutInflater parentInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (groupPosition == 0 || groupPosition == 3 || groupPosition == 10 || groupPosition == 15) {
+        if (groupPosition == 0 || groupPosition == 3 || groupPosition == 10 || groupPosition == 14) {
             convertView = parentInflater.inflate(R.layout.supp_category, null);
             TextView tvCategory = convertView.findViewById(R.id.supp_tv_category);
             tvCategory.setText((String) getGroup(groupPosition));
@@ -102,7 +102,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater childInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (groupPosition != 0 && groupPosition != 3 && groupPosition != 10 && groupPosition != 15) {
+        if (groupPosition != 0 && groupPosition != 3 && groupPosition != 10 && groupPosition != 14) {
             convertView = childInflater.inflate(R.layout.supp_list_child, null);
 
             TextView tvChild = convertView.findViewById(R.id.supp_tv_answer);

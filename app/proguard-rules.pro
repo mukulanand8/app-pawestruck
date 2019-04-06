@@ -26,6 +26,11 @@
   **[] $VALUES;
   public *;
 }
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 -keepattributes Signature
+-keepattributes InnerClasses
 -keepattributes *Annotation*

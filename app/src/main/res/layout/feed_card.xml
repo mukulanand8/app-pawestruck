@@ -85,17 +85,21 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
             android:background="@color/colorPassive"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal">
 
             <HorizontalScrollView
+                android:id="@+id/card_hsv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -131,7 +135,19 @@
                         android:visibility="gone" />
                 </LinearLayout>
             </HorizontalScrollView>
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/card_iv_adopted"
+                android:layout_width="@dimen/card_adopted"
+                android:layout_height="@dimen/card_adopted"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/adopted" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/card_sub_item"
@@ -143,7 +159,9 @@
                 android:id="@+id/card_tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
+                android:layout_marginStart="@dimen/card_description"
+                android:layout_marginEnd="@dimen/card_description"
+                android:layout_marginBottom="@dimen/card_margin"
                 android:textSize="@dimen/card_font_size" />
 
             <androidx.gridlayout.widget.GridLayout

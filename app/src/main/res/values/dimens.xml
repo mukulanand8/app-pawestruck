@@ -52,7 +52,9 @@
 
     <!--Card-->
     <dimen name="card_image">250dp</dimen>
+    <dimen name="card_adopted">125dp</dimen>
     <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_description">12dp</dimen>
     <dimen name="card_corners">8dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_fab_margin">2dp</dimen>

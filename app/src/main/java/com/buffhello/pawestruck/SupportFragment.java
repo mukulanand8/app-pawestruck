@@ -105,11 +105,11 @@ public class SupportFragment extends Fragment {
         String[] a11 = {getResources().getString(R.string.supp_answer11)};
         bind.put(parent.get(13), Arrays.asList(a11));
 
-        String[] a12 = {getResources().getString(R.string.supp_answer12)};
-        bind.put(parent.get(14), Arrays.asList(a12));
-
         String[] category4 = {""};
-        bind.put(parent.get(15), Arrays.asList(category4));
+        bind.put(parent.get(14), Arrays.asList(category4));
+
+        String[] a12 = {getResources().getString(R.string.supp_answer12)};
+        bind.put(parent.get(15), Arrays.asList(a12));
 
         String[] a13 = {getResources().getString(R.string.supp_answer13)};
         bind.put(parent.get(16), Arrays.asList(a13));
@@ -119,9 +119,6 @@ public class SupportFragment extends Fragment {
 
         String[] a15 = {getResources().getString(R.string.supp_answer15)};
         bind.put(parent.get(18), Arrays.asList(a15));
-
-        String[] a16 = {getResources().getString(R.string.supp_answer16)};
-        bind.put(parent.get(19), Arrays.asList(a16));
 
         expandableListAdapter = new ExpandableListAdapter(getContext(), parent, bind);
     }

@@ -9,16 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +29,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,6 +83,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
 
         holder.description.setText(postDetails.getDescription());
         if (postDetails.getAddress() != null) holder.location.setText(postDetails.getAddress());
+
+        if (postDetails.isAdopted()) {
+            holder.ivAdopted.setVisibility(View.VISIBLE);
+            holder.subItem.setVisibility(View.GONE);
+            holder.fabCallTop.setVisibility(View.GONE);
+            holder.fabLocationTop.setVisibility(View.GONE);
+            holder.fabEmailTop.setVisibility(View.GONE);
+            holder.imgExpand.setVisibility(View.GONE);
+            holder.hsv.setAlpha(0.4f);
+        } else {
+            holder.ivAdopted.setVisibility(View.GONE);
+            holder.subItem.setVisibility(View.VISIBLE);
+            holder.fabCallTop.setVisibility(View.VISIBLE);
+            holder.fabLocationTop.setVisibility(View.VISIBLE);
+            holder.fabEmailTop.setVisibility(View.VISIBLE);
+            holder.imgExpand.setVisibility(View.VISIBLE);
+            holder.hsv.setAlpha(1);
+        }
 
         // Sets Report/Delete button
         if (mFirebaseUser != null) {
@@ -159,7 +175,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             if (userDetailsDisplay.getPhonenum() != null && !userDetailsDisplay.getPhonenum().isEmpty())
                 holder.phoneNum.setText(userDetailsDisplay.getPhonenum());
             holder.email.setText(userDetailsDisplay.getEmail());
-            if (userDetailsDisplay.getPhotoURL() == null)
+            if (userDetailsDisplay.getPhotoURL() != null)
                 holder.userPreview.setImageDrawable(mContext.getResources().getDrawable(R.drawable.profile));
             else {
                 Glide.with(mContext).load(userDetailsDisplay.getPhotoURL()).apply(new RequestOptions().placeholder(R.drawable.profile).override(DP_CACHE_PIXELS).circleCrop()).into(holder.userPreview);
@@ -290,10 +306,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             }
         });
 
+        // Sets adopted to true and copies to adoptedPets Collection
         holder.buttonAdopted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                new AlertDialog.Builder(mContext).setTitle(R.string.post_adopted).setMessage(R.string.post_adopted_prompt).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        postDetails.setExpanded(false);
+                        petCollection.document(postDetails.getDocId()).update("adopted", true);
+                        postDetails.setAdopted(true);
+                        notifyItemChanged(position);
+                        copyFirestoreDocument(petCollection.document(postDetails.getDocId()), adoptedPetsCollection.document(postDetails.getDocId()));
+                    }
+                }).setNegativeButton(android.R.string.no, null).setIcon(R.drawable.card_adopted).show();
             }
         });
 
@@ -347,7 +372,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
 
                 // Deletes the post
                 else if (holder.buttonRprtDel.getText().equals(mContext.getResources().getString(R.string.post_delete))) {
-                    final FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
                     new AlertDialog.Builder(mContext).setTitle(R.string.post_delete).setMessage(R.string.post_delete_prompt).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             holder.progressBar.setVisibility(View.VISIBLE);
@@ -383,27 +407,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             holder.imgExpand.setImageResource(R.drawable.arrow_up);
         } else {
             holder.subItem.setVisibility(View.GONE);
-            holder.fabCallTop.setVisibility(View.VISIBLE);
-            holder.fabLocationTop.setVisibility(View.VISIBLE);
-            holder.fabEmailTop.setVisibility(View.VISIBLE);
+            if (!postDetails.isAdopted()) {
+                holder.fabCallTop.setVisibility(View.VISIBLE);
+                holder.fabLocationTop.setVisibility(View.VISIBLE);
+                holder.fabEmailTop.setVisibility(View.VISIBLE);
+            }
             holder.imgExpand.setImageResource(R.drawable.arrow_down);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isExpanded = postDetails.isExpanded();
-                postDetails.setExpanded(!isExpanded);
-                notifyDataSetChanged();
-            }
-        });
-
-        holder.buttonAdopted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                petCollection.document(postDetails.getDocId()).update("adopted", true);
-                copyFirestoreDocument(petCollection.document(postDetails.getDocId()), adoptedPetsCollection.document(postDetails.getDocId()));
-
+                if (!postDetails.isAdopted()) {
+                    boolean isExpanded = postDetails.isExpanded();
+                    postDetails.setExpanded(!isExpanded);
+                    notifyDataSetChanged();
+                }
             }
         });
     }
@@ -450,7 +469,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
         return postDetailsList.size();
     }
 
-    public void moveFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
+    /**
+     * Moves Firestore document from fromPath to toPath (For Deletion)
+     */
+    private void moveFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
         fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -461,71 +483,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        displayToast("DocumentSnapshot successfully written!");
-                                        fromPath.delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        displayToast("DocumentSnapshot successfully deleted!");
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        displayToast("Error deleting document");
-                                                    }
-                                                });
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        displayToast("Error writing document" + e.toString());
+                                        fromPath.delete();
                                     }
                                 });
-                    } else {
-                        displayToast("No such document");
                     }
-                } else {
-                    displayToast("get failed with " + task.getException().toString());
                 }
             }
         });
     }
 
-
-    public void copyFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
+    /**
+     * Copies Firestore document from fromPath to toPath (For Adopted)
+     */
+    private void copyFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath) {
         fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        toPath.set(document.getData())
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        displayToast("DocumentSnapshot successfully written!");
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        displayToast("Error writing document");
-                                    }
-                                });
-                    } else {
-                        displayToast("No such document");
+                        toPath.set(document.getData());
                     }
-                } else {
-                    displayToast("get failed with ");
                 }
             }
         });
-    }
-
-    public void displayToast(String toast) {
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -533,13 +514,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
      */
     static class FeedViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView petPreview1, petPreview2, petPreview3, petPreview4, imgExpand, userPreview;
+        private ImageView petPreview1, petPreview2, petPreview3, petPreview4, imgExpand, userPreview, ivAdopted;
         private TextView description, username, location, phoneNum, email;
         private LinearLayout subItem;
         private FloatingActionButton fabBookmark, fabEmailTop, fabCallTop, fabLocationTop, fabEmailBot, fabCallBot, fabLocationBot;
         private ArrayList<ImageView> photoUrls = new ArrayList<>();
         private Button buttonRprtDel, buttonAdopted;
         private ProgressBar progressBar;
+        private HorizontalScrollView hsv;
 
         FeedViewHolder(View itemView) {
             super(itemView);
@@ -552,6 +534,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             photoUrls.add(petPreview2);
             photoUrls.add(petPreview3);
             photoUrls.add(petPreview4);
+            ivAdopted = itemView.findViewById(R.id.card_iv_adopted);
             description = itemView.findViewById(R.id.card_tv_description);
             username = itemView.findViewById(R.id.card_tv_name);
             phoneNum = itemView.findViewById(R.id.card_tv_phone);
@@ -569,6 +552,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.FeedViewHolder
             buttonRprtDel = itemView.findViewById(R.id.card_button_del_rep);
             buttonAdopted = itemView.findViewById(R.id.card_button_adopted);
             progressBar = itemView.findViewById(R.id.card_progress);
+            hsv = itemView.findViewById(R.id.card_hsv);
 
             int maxWidth = mContext.getResources().getConfiguration().screenWidthDp * 2;
             email.setMaxWidth(maxWidth);
